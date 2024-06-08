@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SistemaPagoFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.14.
@@ -25,3 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+=======
+# sistema-pago-interfaz
+Interfaz creada con Angular 16 para el consumo de la API REST Sistema-pago
+>>>>>>> 8a9683d2f3fc921581cd8fdd3d31b0071ff1e6c0
