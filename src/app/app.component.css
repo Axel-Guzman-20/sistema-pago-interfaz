@@ -1,61 +1,259 @@
-.form-container {
-    width: 60%; /* Ancho del formulario */
-    height: auto; /* Altura automática según el contenido */
+/* Estilos de la barra de navegación */
+.navegar {
+    background-color: #24292e;
+    padding: 10px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background-color: #706d6d;
-    border: 1px solid #dd1313;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin: auto;
-    position: relative; /* Posición relativa para que no ocupe toda la página */
 }
 
-/* Resto del código... */
+.navegar ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
 
+.navegar ul li {
+    display: inline;
+}
 
-/* Estilos del título del formulario */
-.form-container h1 {
-    text-align: center;
-    color: #333333;
-    font-size: 24px;
+.navegar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navegar ul li a:hover {
+    background-color: #444d56;
+}
+
+/* pantallas de tamaño grande (desktops, laptops) */
+@media (min-width: 992px) {
+    .principal {
+        padding: 40px;
+    }
+
+    .contenedor-formulario-tarjeta {
+        gap: 50px;
+    }
+
+    .vista-previa-tarjeta {
+        width: 400px;
+        height: 240px;
+    }
+
+    .contenedor-formulario {
+        width: 400px;
+    }
+}
+
+/* pantallas de tamaño mediano (tablets) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .principal {
+        padding: 30px;
+    }
+
+    .contenedor-formulario-tarjeta {
+        flex-direction: column;
+    }
+
+    .vista-previa-tarjeta {
+        width: 300px;
+        height: 180px;
+    }
+
+    .contenedor-formulario {
+        width: 300px;
+    }
+}
+
+/* pantallas de tamaño pequeño (teléfonos móviles) */
+@media (max-width: 767px) {
+    .principal {
+        padding: 20px;
+    }
+
+    .contenedor-formulario-tarjeta {
+        flex-direction: column;
+    }
+
+    .vista-previa-tarjeta {
+        width: 250px;
+        height: 150px;
+    }
+
+    .contenedor-formulario {
+        width: 250px;
+    }
+}
+
+.principal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: #8a1010;
+    padding: 20px;
+}
+
+/* Barra de navegación */
+.mat-toolbar {
+    width: 100%;
     margin-bottom: 20px;
 }
 
-/* Estilos de los campos de formulario */
-.form-container mat-form-field {
-    width: 100%;
-    margin-bottom: 10px;
+.toolbar-title {
+    flex: 1;
 }
 
-/* Estilos del botón de envío */
-.form-container button {
+.spacer {
+    flex: 1 1 auto;
+}
+
+.contenedor-formulario-tarjeta {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background-color: #807f7f;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.vista-previa-tarjeta {
+    width: 300px;
+    height: 180px;
+    perspective: 1000px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.vista-previa-tarjeta.flip .frente-de-tarjeta {
+    transform: rotateY(180deg);
+}
+
+.vista-previa-tarjeta.flip .detras-de-tarjeta {
+    transform: rotateY(0);
+}
+
+.frente-de-tarjeta,
+.detras-de-tarjeta {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backface-visibility: hidden;
+    position: absolute;
+    transition: transform 0.6s linear;
+}
+
+.frente-de-tarjeta {
+    background: linear-gradient(135deg, #0ab104, #b5b5b5);
+    transform: rotateY(0);
+}
+
+.detras-de-tarjeta {
+    background: #042c09;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    transform: rotateY(180deg);
+}
+
+.magnetic-strip {
+    width: 100%;
+    height: 40px;
+    background-color: #2d2d2d;
+    margin-bottom: 20px;
+}
+
+.barra {
+    width: 80%;
+    height: 30px;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+    border-radius: 3px;
+}
+
+.barra .cvv {
+    color: #000000;
+}
+
+.detalles-de-tarjeta {
+    color: #000000;
+    text-align: left;
+    padding: 20px;
+}
+
+.numero-de-tarjeta,
+.titular-de-tarjeta,
+.fecha-de-expiracion {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.cvv {
+    font-size: 16px;
+}
+
+.contenedor-formulario {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+/* Inputs de fecha de expiración */
+.fecha-expiracion-inputs {
+    display: flex;
+    align-items: center;
+}
+
+.fecha-expiracion-inputs input {
+    width: 45%;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.fecha-expiracion-inputs span {
+    margin: 0 5px;
+}
+
+/* Estilo del botón de envío */
+button {
     width: 100%;
     height: 50px;
     font-size: 18px;
-    background-color: #007BFF; /* Color de fondo azul */
-    color: #ffffff; /* Color de texto blanco */
+    background-color: #00bfff;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button mat-icon {
+    margin-right: 5px;
 }
 
 /* Cambio de color al pasar el mouse sobre el botón */
-.form-container button:hover {
-    background-color: #0056b3; /* Color de fondo azul oscuro al pasar el mouse */
-}
-
-/* Indicador de campo requerido */
-.form-container .required::after {
-    content: "*";
-    color: #FF0000; /* Color de asterisco rojo para campos requeridos */
+button:hover {
+    background-color: #009acd;
 }
 
 /* Estilos de los errores de validación */
-.form-container mat-error {
-    color: #FF0000; /* Color de texto rojo para los errores de validación */
+mat-error {
+    color: #ff0000;
 }

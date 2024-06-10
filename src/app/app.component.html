@@ -1,106 +1,92 @@
-<div
-  style="width: 50vw; height: 50vh; display: flex;flex-direction: column;justify-content: center;align-items: center;">
-  <div class="form-container" [formGroup]="form"
-    style="width: 50vw; height: 50vh; display: flex;flex-direction: column;justify-content: center;align-items: center; gap: 10px;">
-    <h1>Formulario de transacciones</h1>
-    <mat-form-field appearance="fill">
-      <mat-label>Monto</mat-label>
-      <input matInput formControlName="amount">
-      <div *ngIf="form.get('amount') as amountControl">
-        <div *ngIf="amountControl.invalid && amountControl.touched">
-          <mat-error *ngIf="amountControl.errors?.['required']">El monto es requerido</mat-error>
-          <mat-error *ngIf="amountControl.errors?.['pattern']">El monto debe ser un número</mat-error>
-        </div>
-      </div>
-    </mat-form-field>
-    <p>{{form.get('amount')?.value}}</p>
-    <mat-form-field appearance="fill">
-      <mat-label>Correo electrónico</mat-label>
-      <input matInput formControlName="email">
-      <div *ngIf="form.get('email') as emailControl">
-        <div *ngIf="emailControl.invalid && emailControl.touched">
-          <mat-error *ngIf="emailControl.errors?.['required']">El correo es requerido</mat-error>
-          <mat-error *ngIf="emailControl.errors?.['email']">Formato de correo inválido</mat-error>
-        </div>
-      </div>
-    </mat-form-field>
-    <p>{{form.get('email')?.valid}}</p>
+<nav class="navegar">
+  <ul>
+    <li><a href="#">Realizar pago</a></li>
+    <li><a href="#">Ver transacción</a></li>
+    <li><a href="#">Ver transacción</a></li>
+  </ul>
+</nav>
+<div class="principal">
+  <div class="contenedor-formulario-tarjeta">
 
-    <mat-form-field appearance="fill">
-      <mat-label>Número de tarjeta</mat-label>
-      <input matInput formControlName="cardNumber">
-      <div *ngIf="form.get('cardNumber') as cardNumberControl">
-        <div *ngIf="cardNumberControl.invalid && cardNumberControl.touched">
-          <mat-error *ngIf="cardNumberControl.errors?.['required']">El No° de tarjeta es requerido</mat-error>
-          <mat-error *ngIf="cardNumberControl.errors?.['minlength']">El No° de tarjeta debe tener 16
-            dígitos</mat-error>
-          <mat-error *ngIf="cardNumberControl.errors?.['maxlength']">El No° de tarjeta debe tener 16
-            dígitos</mat-error>
-          <mat-error *ngIf="cardNumberControl.errors?.['pattern']">El No° de tarjeta debe ser un número</mat-error>
+    <div class="vista-previa-tarjeta" [class.flip]="showBack">
+      <div class="frente-de-tarjeta">
+        <div class="detalles-de-tarjeta">
+          <p class="numero-de-tarjeta">{{ form.get('cardNumber')?.value || 'XXXX XXXX XXXX XXXX' }}</p>
+          <p class="titular-de-tarjeta">{{ form.get('cardholderName')?.value || 'Titular de la tarjeta' }}</p>
+          <p class="fecha-de-expiracion">{{ form.get('expirationMonth')?.value || 'MM' }} / {{
+            form.get('expirationYear')?.value || 'YY' }}</p>
         </div>
       </div>
-    </mat-form-field>
-    <p>{{form.get('cardNumber')?.value}}</p>
+      <div class="detras-de-tarjeta">
+        <div class="magnetic-strip"></div>
+        <div class="barra">
+          <span class="cvv">{{ form.get('cvv')?.value || 'CVV' }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="contenedor-formulario" [formGroup]="form">
+      <h1>Formulario de pago</h1>
+      <mat-form-field appearance="fill">
+        <mat-label>Monto</mat-label>
+        <input matInput formControlName="amount">
+        <mat-error *ngIf="form.get('amount')?.touched && form.get('amount')?.invalid">
+          {{ getErrorMessage('amount') }}
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>CVV</mat-label>
-      <input matInput formControlName="cvv">
-      <div *ngIf="form.get('cvv') as cvvControl">
-        <div *ngIf="cvvControl.invalid && cvvControl.touched">
-          <mat-error *ngIf="cvvControl.errors?.['required']">El cvv es requerido</mat-error>
-          <mat-error *ngIf="cvvControl.errors?.['minlength']">El cvv debe tener 3 dígitos</mat-error>
-          <mat-error *ngIf="cvvControl.errors?.['maxlength']">El cvv debe tener 3 dígitos</mat-error>
-          <mat-error *ngIf="cvvControl.errors?.['pattern']">El cvv debe ser un número</mat-error>
-        </div>
-      </div>
-    </mat-form-field>
-    <p>{{form.get('cvv')?.value}}</p>
-    <mat-form-field appearance="fill">
-      <mat-label>Titular de la tarjeta</mat-label>
-      <input matInput formControlName="cardholderName">
-      <div *ngIf="form.get('cardholderName') as cardholderNameControl">
-        <div *ngIf="cardholderNameControl.invalid && cardholderNameControl.touched">
-          <mat-error *ngIf="cardholderNameControl.errors?.['required']">El titular de la tarjeta es
-            requerido</mat-error>
-          <mat-error *ngIf="cardholderNameControl.errors?.['pattern']">El nombre del titular debe contener solo
-            letras y
-            espacios</mat-error>
-          <mat-error *ngIf="cardholderNameControl.errors?.['minlength']">El nombre del titular debe tener al menos 4
-            caracteres</mat-error>
-        </div>
-      </div>
-    </mat-form-field>
-    <p>{{form.get('cardholderName')?.value}}</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+          {{ getErrorMessage('email') }}
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Mes de expiración</mat-label>
-      <input matInput formControlName="expirationMonth">
-      <div *ngIf="form.get('expirationMonth') as expirationMonthControl">
-        <div *ngIf="expirationMonthControl.invalid && expirationMonthControl.touched">
-          <mat-error *ngIf="expirationMonthControl.errors?.['required']">El mes de expiración es
-            requerido</mat-error>
-          <mat-error *ngIf="expirationMonthControl.errors?.['pattern']">El mes de expiración debe ser un número
-            entre 01
-            y 12</mat-error>
-        </div>
-      </div>
-    </mat-form-field>
-    <p>{{form.get('expirationMonth')?.value}}</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Número de tarjeta</mat-label>
+        <input matInput formControlName="cardNumber">
+        <mat-error *ngIf="form.get('cardNumber')?.touched && form.get('cardNumber')?.invalid">
+          {{ getErrorMessage('cardNumber') }}
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Año de expiración</mat-label>
-      <input matInput formControlName="expirationYear">
-      <div *ngIf="form.get('expirationYear') as expirationYearControl">
-        <div *ngIf="expirationYearControl.invalid && expirationYearControl.touched">
-          <mat-error *ngIf="expirationYearControl.errors?.['required']">El año de expiración es
-            requerido</mat-error>
-          <mat-error *ngIf="expirationYearControl.errors?.['pattern']">El año de expiración debe ser un número de 2
-            dígitos</mat-error>
-        </div>
+      <mat-form-field appearance="fill">
+        <mat-label>CVV</mat-label>
+        <input matInput formControlName="cvv" (focus)="showCardBack()" (blur)="showCardFront()">
+        <mat-error *ngIf="form.get('cvv')?.touched && form.get('cvv')?.invalid">
+          {{ getErrorMessage('cvv') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Titular de la tarjeta</mat-label>
+        <input matInput formControlName="cardholderName">
+        <mat-error *ngIf="form.get('cardholderName')?.touched && form.get('cardholderName')?.invalid">
+          {{ getErrorMessage('cardholderName') }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="fecha-expiracion-inputs">
+        <mat-form-field appearance="fill">
+          <mat-label>Mes de expiración</mat-label>
+          <input matInput formControlName="expirationMonth" placeholder="MM">
+          <mat-error *ngIf="form.get('expirationMonth')?.touched && form.get('expirationMonth')?.invalid">
+            {{ getErrorMessage('expirationMonth') }}
+          </mat-error>
+        </mat-form-field>
+        <span>/</span>
+        <mat-form-field appearance="fill">
+          <mat-label>Año de expiración</mat-label>
+          <input matInput formControlName="expirationYear" placeholder="YY">
+          <mat-error *ngIf="form.get('expirationYear')?.touched && form.get('expirationYear')?.invalid">
+            {{ getErrorMessage('expirationYear') }}
+          </mat-error>
+        </mat-form-field>
       </div>
-    </mat-form-field>
-    <p>{{form.get('expirationYear')?.value}}</p>
-    <button mat-raised-button color="primary" (click)="enviarValores()" [disabled]="form.invalid">Realizar
-      pago</button>
+
+      <button mat-raised-button color="primary" (click)="enviarValores()" [disabled]="form.invalid">
+        Realizar pago
+      </button>
+    </div>
   </div>
 </div>
