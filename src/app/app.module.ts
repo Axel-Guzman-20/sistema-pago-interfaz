@@ -9,14 +9,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogComponent } from './dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { VerTransaccionesComponent } from './ver-transacciones/ver-transacciones.component';
+import { AppRoutingModule } from './app-routing.module'; // Importar el módulo de rutas
+import { MatTableModule } from '@angular/material/table';
+import { RealizarPagoComponent } from './realizar-pago/realizar-pago.component'; // Importar MatTableModule
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent,
+    VerTransaccionesComponent,
+    RealizarPagoComponent,
   ],
   imports: [
     FormsModule,
@@ -30,7 +36,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatIconModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AppRoutingModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
