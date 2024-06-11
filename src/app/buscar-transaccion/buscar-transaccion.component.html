@@ -1,0 +1,27 @@
+<div class="buscar-transaccion">
+    <h1>Buscar Transacción</h1>
+    <form [formGroup]="form" (ngSubmit)="buscarTransaccion()">
+      <mat-form-field appearance="fill">
+        <mat-label>ID de Transacción</mat-label>
+        <input matInput formControlName="transactionId">
+        <mat-error *ngIf="form.get('transactionId')?.touched && form.get('transactionId')?.invalid">
+          El ID de la transacción es requerido
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="form.invalid">Buscar</button>
+    </form>
+  
+    <div *ngIf="transaction">
+      <h2>Detalles de la Transacción</h2>
+      <p><strong>ID:</strong> {{ transaction.transactionId }}</p>
+      <p><strong>Monto:</strong> {{ transaction.amount }}</p>
+      <p><strong>Marca:</strong> {{ transaction.brand }}</p>
+      <p><strong>Banco:</strong> {{ transaction.bank }}</p>
+      <p><strong>Número de Tarjeta:</strong> {{ transaction.cardNumber }}</p>
+      <p><strong>Aprobado:</strong> {{ transaction.approved ? 'Sí' : 'No' }}</p>
+    </div>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>

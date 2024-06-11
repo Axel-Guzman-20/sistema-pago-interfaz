@@ -15,7 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { VerTransaccionesComponent } from './ver-transacciones/ver-transacciones.component';
 import { AppRoutingModule } from './app-routing.module'; // Importar el módulo de rutas
 import { MatTableModule } from '@angular/material/table';
-import { RealizarPagoComponent } from './realizar-pago/realizar-pago.component'; // Importar MatTableModule
+import { RealizarPagoComponent } from './realizar-pago/realizar-pago.component';
+import { BuscarTransaccionComponent } from './buscar-transaccion/buscar-transaccion.component'; // Importar MatTableModule
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { RealizarPagoComponent } from './realizar-pago/realizar-pago.component';
     AppComponent,
     VerTransaccionesComponent,
     RealizarPagoComponent,
+    BuscarTransaccionComponent,
   ],
   imports: [
     FormsModule,
